@@ -1,0 +1,44 @@
+## .NET MAUI / Visual Studio .gitignore
+
+# Build results
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+[Xx]64/
+[Xx]86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+build/
+bld/
+
+# Visual Studio cache / options
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# MAUI / mobile build artifacts
+*.apk
+*.aab
+*.ipa
+*.app
+*.appx
+*.appxbundle
+
+# Rider / VS Code
+.idea/
+.vscode/
+
+# NuGet
+*.nupkg
+packages/
+.nuget/
+
+# Misc
+*.log
+*.tmp
+[Tt]humbs.db
+.DS_Store

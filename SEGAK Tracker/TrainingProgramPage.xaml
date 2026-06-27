@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SEGAK_Tracker.TrainingProgramPage"
+             Title="SEGAK Training Program">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="15">
+            <!-- Header -->
+            <Label Text="Time to train!"
+                   FontSize="Large"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   Margin="0,10"/>
+
+            <!-- Up & down the bench -->
+            <Frame CornerRadius="10" BackgroundColor="#FF0000" Padding="10">
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="bench_exercise.png" WidthRequest="100" HeightRequest="100" Aspect="AspectFill"/>
+                    <Label Text="Up & down the bench"
+                           FontSize="Medium"
+                           VerticalOptions="Center"
+                           TextColor="White"
+                           Margin="10,0"/>
+                </StackLayout>
+            </Frame>
+
+            <!-- Push up -->
+            <Frame CornerRadius="10" BackgroundColor="#800080" Padding="10">
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="push_up.png" WidthRequest="100" HeightRequest="100" Aspect="AspectFill"/>
+                    <Label Text="Push up"
+                           FontSize="Medium"
+                           VerticalOptions="Center"
+                           TextColor="White"
+                           Margin="10,0"/>
+                </StackLayout>
+            </Frame>
+
+            <!-- Partial curl up -->
+            <Frame CornerRadius="10" BackgroundColor="#008000" Padding="10">
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="curl_up.png" WidthRequest="100" HeightRequest="100" Aspect="AspectFill"/>
+                    <Label Text="Partial curl up"
+                           FontSize="Medium"
+                           VerticalOptions="Center"
+                           TextColor="White"
+                           Margin="10,0"/>
+                </StackLayout>
+            </Frame>
+
+            <!-- Sit & reach -->
+            <Frame CornerRadius="10" BackgroundColor="#FF1493" Padding="10">
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="sit_and_reach.png" WidthRequest="100" HeightRequest="100" Aspect="AspectFill"/>
+                    <Label Text="Sit & reach"
+                           FontSize="Medium"
+                           VerticalOptions="Center"
+                           TextColor="White"
+                           Margin="10,0"/>
+                </StackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

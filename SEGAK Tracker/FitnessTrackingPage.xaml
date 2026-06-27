@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SEGAK_Tracker.FitnessTrackingPage"
+             Title="Personalized Fitness Tracking">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20">
+            <Label Text="Record your score"
+                   FontSize="Medium"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
+            <!-- Gender selection -->
+            <Label Text="Gender:"/>
+            <RadioButton Content="Male" GroupName="Gender" CheckedChanged="OnGenderCheckedChanged"/>
+            <RadioButton Content="Female" GroupName="Gender" CheckedChanged="OnGenderCheckedChanged"/>
+
+            <!-- Age input -->
+            <Label Text="Age :"
+                   FontSize="Small" />
+            <Entry Placeholder="Enter your age" Keyboard="Numeric"/>
+
+            <!-- Exercise inputs -->
+            <Label Text="Up and down the bench :"
+                   FontSize="Small" />
+            <Entry Placeholder="Pulse count" Keyboard="Numeric"/>
+
+            <Label Text="Push up :"
+                   FontSize="Small" />
+            <Entry Placeholder="Push up count" Keyboard="Numeric"/>
+
+            <Label Text="Partial curl :"
+                   FontSize="Small" />
+            <Entry Placeholder="Partial curl count" Keyboard="Numeric"/>
+
+            <Label Text="Sit and reach :"
+                   FontSize="Small" />
+            <Entry Placeholder="Sit and reach count" Keyboard="Numeric"/>
+
+            <!-- Save button -->
+            <Button Text="Save" BackgroundColor="Purple" TextColor="White"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

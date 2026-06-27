@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SEGAK_Tracker"
+             x:Class="SEGAK_Tracker.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ExistingLabelStyle" TargetType="Label">
+            </Style>
+
+            <Style x:Key="LabelShadowStyle" TargetType="Label">
+                <Setter Property="Shadow">
+                    <Setter.Value>
+                        <Shadow Radius="15" Opacity="1" Brush="Black"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="LabelShadowStyle2" TargetType="Label">
+                <Setter Property="Shadow">
+                    <Setter.Value>
+                        <Shadow Radius="5" Opacity="1" Brush="Black"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <LinearGradientBrush x:Key="RedGradientBackground"
+                                 StartPoint="0,0"
+                                 EndPoint="0,1">
+                <GradientStop Color="#A20025" Offset="0.1"/>
+                <GradientStop Color="#000000" Offset="1.0"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="ButtonGradientBackground" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#76608A" Offset="0.0"/>
+                <GradientStop Color="#000000" Offset="1.0"/>
+            </LinearGradientBrush>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

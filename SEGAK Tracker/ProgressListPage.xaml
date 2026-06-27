@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SEGAK_Tracker.ProgressListPage"
+             Title="Progress List">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20">
+            <!-- Header Section -->
+            <Label Text="Gear up for greatness"
+                   FontSize="Large"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   Margin="0,10"/>
+
+            <!-- Progress Details -->
+            <Frame BackgroundColor="Black" Padding="10">
+                <VerticalStackLayout>
+                    <Label Text="Up & down the bench : 80 -> 75 (+5)"
+                           FontSize="Medium"
+                           TextColor="White"/>
+                    <Label Text="Push up : 24 -> 28 (+4)"
+                           FontSize="Medium"
+                           TextColor="White"/>
+                    <Label Text="Partial curl : 11 -> 19 (+8)"
+                           FontSize="Medium"
+                           TextColor="White"/>
+                    <Label Text="Sit & reach : 26 -> 32 (+6)"
+                           FontSize="Medium"
+                           TextColor="White"/>
+
+                    <!-- Score and Grade -->
+                    <Label Text="Your score : 17 Marks"
+                           FontSize="Medium"
+                           TextColor="Yellow"/>
+                    <Label Text="Grade : B"
+                           FontSize="Large"
+                           TextColor="Yellow"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Reset Button -->
+            <Button Text="Reset"
+                    BackgroundColor="Gray"
+                    TextColor="White"
+                    VerticalOptions="End"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
