@@ -1,18 +1,20 @@
-using System;
-using Microsoft.Maui.Controls;
+using SegakTracker.Core.ViewModels;
 
-namespace SEGAK_Tracker
+namespace SEGAK_Tracker;
+
+public partial class FitnessTrackingPage : ContentPage
 {
-    public partial class FitnessTrackingPage : ContentPage
-    {
-        public FitnessTrackingPage()
-        {
-            InitializeComponent();
-        }
+    private readonly FitnessTrackingViewModel _viewModel;
 
-        private void OnGenderCheckedChanged(object sender, CheckedChangedEventArgs e)
-        {
-            // Implementation for gender radio button change
-        }
+    public FitnessTrackingPage(FitnessTrackingViewModel viewModel)
+    {
+        InitializeComponent();
+        BindingContext = _viewModel = viewModel;
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        _viewModel.Load();
     }
 }

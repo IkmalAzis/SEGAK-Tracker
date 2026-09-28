@@ -1,45 +1,79 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:SegakTracker.Core.ViewModels;assembly=SegakTracker.Core"
              x:Class="SEGAK_Tracker.FitnessTrackingPage"
+             x:DataType="vm:FitnessTrackingViewModel"
              Title="Personalized Fitness Tracking">
 
     <ScrollView>
-        <VerticalStackLayout Spacing="20" Padding="20">
+        <VerticalStackLayout Spacing="4" Padding="20,20,20,32">
             <Label Text="Record your score"
-                   FontSize="Medium"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center" />
+                   Style="{StaticResource ScreenTitle}"
+                   HorizontalOptions="Center"
+                   SemanticProperties.HeadingLevel="Level1" />
+            <Label Text="Do the four SEGAK tests, then enter your results. Your score and grade are worked out for your age and gender."
+                   Style="{StaticResource MutedLabel}"
+                   HorizontalTextAlignment="Center"
+                   Margin="0,4,0,12" />
 
-            <!-- Gender selection -->
-            <Label Text="Gender:"/>
-            <RadioButton Content="Male" GroupName="Gender" CheckedChanged="OnGenderCheckedChanged"/>
-            <RadioButton Content="Female" GroupName="Gender" CheckedChanged="OnGenderCheckedChanged"/>
+            <!-- Gender -->
+            <Label Text="Gender :" Style="{StaticResource FieldLabel}" />
+            <HorizontalStackLayout Spacing="24">
+                <RadioButton Content="Male" GroupName="Gender" TextColor="White" IsChecked="{Binding IsMale}" />
+                <RadioButton Content="Female" GroupName="Gender" TextColor="White" IsChecked="{Binding IsFemale}" />
+            </HorizontalStackLayout>
+            <Label Text="{Binding GenderError}" Style="{StaticResource ErrorLabel}"
+                   IsVisible="{Binding GenderError, Converter={StaticResource HasText}}" />
 
-            <!-- Age input -->
-            <Label Text="Age :"
-                   FontSize="Small" />
-            <Entry Placeholder="Enter your age" Keyboard="Numeric"/>
+            <!-- Age -->
+            <Label Text="Age :" Style="{StaticResource FieldLabel}" />
+            <Entry Text="{Binding AgeText}" Placeholder="Age 10 - 17" Keyboard="Numeric" MaxLength="2" ReturnType="Next"
+                   SemanticProperties.Description="Age" />
+            <Label Text="{Binding AgeError}" Style="{StaticResource ErrorLabel}"
+                   IsVisible="{Binding AgeError, Converter={StaticResource HasText}}" />
 
-            <!-- Exercise inputs -->
-            <Label Text="Up and down the bench :"
-                   FontSize="Small" />
-            <Entry Placeholder="Pulse count" Keyboard="Numeric"/>
+            <!-- Step test -->
+            <Label Text="Up and down the bench :" Style="{StaticResource FieldLabel}" />
+            <Label Text="Pulse per minute measured right after 3 minutes of stepping" Style="{StaticResource MutedLabel}" />
+            <Entry Text="{Binding PulseText}" Placeholder="Pulse count (bpm)" Keyboard="Numeric" MaxLength="3" ReturnType="Next"
+                   SemanticProperties.Description="Pulse count after the step test" />
+            <Label Text="{Binding PulseError}" Style="{StaticResource ErrorLabel}"
+                   IsVisible="{Binding PulseError, Converter={StaticResource HasText}}" />
 
-            <Label Text="Push up :"
-                   FontSize="Small" />
-            <Entry Placeholder="Push up count" Keyboard="Numeric"/>
+            <!-- Push up -->
+            <Label Text="{Binding PushUpLabel}" Style="{StaticResource FieldLabel}" />
+            <Label Text="Correct repetitions in 1 minute" Style="{StaticResource MutedLabel}" />
+            <Entry Text="{Binding PushUpsText}" Placeholder="Push up count" Keyboard="Numeric" MaxLength="3" ReturnType="Next"
+                   SemanticProperties.Description="Push up count" />
+            <Label Text="{Binding PushUpsError}" Style="{StaticResource ErrorLabel}"
+                   IsVisible="{Binding PushUpsError, Converter={StaticResource HasText}}" />
 
-            <Label Text="Partial curl :"
-                   FontSize="Small" />
-            <Entry Placeholder="Partial curl count" Keyboard="Numeric"/>
+            <!-- Partial curl up -->
+            <Label Text="Partial curl up :" Style="{StaticResource FieldLabel}" />
+            <Label Text="Correct repetitions in 1 minute" Style="{StaticResource MutedLabel}" />
+            <Entry Text="{Binding CurlUpsText}" Placeholder="Partial curl up count" Keyboard="Numeric" MaxLength="3" ReturnType="Next"
+                   SemanticProperties.Description="Partial curl up count" />
+            <Label Text="{Binding CurlUpsError}" Style="{StaticResource ErrorLabel}"
+                   IsVisible="{Binding CurlUpsError, Converter={StaticResource HasText}}" />
 
-            <Label Text="Sit and reach :"
-                   FontSize="Small" />
-            <Entry Placeholder="Sit and reach count" Keyboard="Numeric"/>
+            <!-- Sit and reach -->
+            <Label Text="Sit and reach :" Style="{StaticResource FieldLabel}" />
+            <Label Text="Best reach in centimetres, e.g. 31.5" Style="{StaticResource MutedLabel}" />
+            <Entry Text="{Binding SitAndReachText}" Placeholder="Sit and reach (cm)" Keyboard="Numeric" MaxLength="5" ReturnType="Done"
+                   SemanticProperties.Description="Sit and reach distance in centimetres" />
+            <Label Text="{Binding SitAndReachError}" Style="{StaticResource ErrorLabel}"
+                   IsVisible="{Binding SitAndReachError, Converter={StaticResource HasText}}" />
 
-            <!-- Save button -->
-            <Button Text="Save" BackgroundColor="Purple" TextColor="White"/>
+            <Button Text="Save"
+                    Command="{Binding SaveCommand}"
+                    Style="{StaticResource PrimaryButton}"
+                    Margin="0,24,0,0" />
+            <Button Text="Clear"
+                    Command="{Binding ClearCommand}"
+                    Style="{StaticResource SecondaryButton}"
+                    Margin="0,8,0,0" />
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="White" Margin="0,12,0,0" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

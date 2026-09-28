@@ -1,7 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:pages="clr-namespace:SEGAK_Tracker"
-       x:Class="SEGAK_Tracker.AppShell">
-    <ShellContent Route="mainPage" ContentTemplate="{DataTemplate pages:MainPage}" />
-    <ShellContent Route="onboardingPage" ContentTemplate="{DataTemplate pages:OnboardingPage}" />
+       x:Class="SEGAK_Tracker.AppShell"
+       Title="SEGAK Tracker"
+       FlyoutBehavior="Flyout">
+
+    <Shell.FlyoutHeader>
+        <VerticalStackLayout Padding="20,40,20,20" Spacing="6">
+            <Image Source="fitness_icon.png" HeightRequest="72" HorizontalOptions="Start" />
+            <Label Text="SEGAK Tracker" FontSize="22" FontAttributes="Bold" TextColor="White" />
+            <Label Text="Train today, ace SEGAK tomorrow." FontSize="13" TextColor="{StaticResource MutedText}" />
+        </VerticalStackLayout>
+    </Shell.FlyoutHeader>
+
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid Padding="20,14" ColumnDefinitions="*">
+                <Label x:DataType="BaseShellItem" Text="{Binding Title}" FontSize="17" TextColor="White" VerticalOptions="Center" />
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+
+    <FlyoutItem Title="Home" Route="home">
+        <ShellContent Title="Start your training today!" ContentTemplate="{DataTemplate pages:HomePage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Fitness Tracking" Route="fitnessTracking">
+        <ShellContent Title="Personalized Fitness Tracking" ContentTemplate="{DataTemplate pages:FitnessTrackingPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Training Program" Route="trainingProgram">
+        <ShellContent Title="SEGAK Training Program" ContentTemplate="{DataTemplate pages:TrainingProgramPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Progress List" Route="progressList">
+        <ShellContent Title="Progress List" ContentTemplate="{DataTemplate pages:ProgressListPage}" />
+    </FlyoutItem>
 </Shell>

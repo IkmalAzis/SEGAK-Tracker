@@ -5,6 +5,10 @@ VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEGAK Tracker", "SEGAK Tracker\SEGAK Tracker.csproj", "{44DCAA0F-0139-494F-86CC-8212B20FD9E1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SegakTracker.Core", "SegakTracker.Core\SegakTracker.Core.csproj", "{EE4CEF06-3733-4475-94D3-DE24A862BF57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SegakTracker.Tests", "SegakTracker.Tests\SegakTracker.Tests.csproj", "{8E346E21-23A5-4398-9318-6ECDDFB534C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +21,14 @@ Global
 		{44DCAA0F-0139-494F-86CC-8212B20FD9E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44DCAA0F-0139-494F-86CC-8212B20FD9E1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{44DCAA0F-0139-494F-86CC-8212B20FD9E1}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{EE4CEF06-3733-4475-94D3-DE24A862BF57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE4CEF06-3733-4475-94D3-DE24A862BF57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE4CEF06-3733-4475-94D3-DE24A862BF57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE4CEF06-3733-4475-94D3-DE24A862BF57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E346E21-23A5-4398-9318-6ECDDFB534C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E346E21-23A5-4398-9318-6ECDDFB534C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E346E21-23A5-4398-9318-6ECDDFB534C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E346E21-23A5-4398-9318-6ECDDFB534C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

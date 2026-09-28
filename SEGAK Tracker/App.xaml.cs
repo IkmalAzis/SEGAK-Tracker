@@ -1,14 +1,20 @@
-﻿using Microsoft.Maui.Controls;
-using System;
+using SegakTracker.Core.Services;
 
 namespace SEGAK_Tracker
 {
     public partial class App : Application
     {
-        public App()
+        public App(IServiceProvider services, ISettingsService settings)
         {
             InitializeComponent();
-            MainPage = new AppShell(); }
 
+            // The design is dark-only, so keep system controls (entries, alerts) dark as well.
+            UserAppTheme = AppTheme.Dark;
+
+            // Onboarding is only shown until the student taps "Begin Your Journey" once.
+            MainPage = settings.HasCompletedOnboarding
+                ? services.GetRequiredService<AppShell>()
+                : services.GetRequiredService<OnboardingPage>();
+        }
     }
 }

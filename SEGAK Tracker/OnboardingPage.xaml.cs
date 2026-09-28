@@ -1,31 +1,12 @@
-using Microsoft.Maui.Controls;
-using System;
-using System.Windows.Input;
+using SegakTracker.Core.ViewModels;
 
 namespace SEGAK_Tracker;
 
 public partial class OnboardingPage : ContentPage
 {
-    public ICommand StartCommand { get; }
-
-    public OnboardingPage()
+    public OnboardingPage(OnboardingViewModel viewModel)
     {
         InitializeComponent();
-        StartCommand = new Command(Start);
-        BindingContext = this;
+        BindingContext = viewModel;
     }
-
-    private async void Start()
-    {
-        try
-        {
-            await Shell.Current.GoToAsync("///mainPage");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Navigation failed: {ex.Message}");
-        }
-    }
-
-
 }

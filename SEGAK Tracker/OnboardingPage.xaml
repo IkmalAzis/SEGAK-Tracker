@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:SegakTracker.Core.ViewModels;assembly=SegakTracker.Core"
              x:Class="SEGAK_Tracker.OnboardingPage"
+             x:DataType="vm:OnboardingViewModel"
+             Background="#001311"
              BackgroundColor="#001311">
     <ScrollView>
-        <VerticalStackLayout Spacing="0" Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-            <Image Source="onboarding_image.png" Aspect="AspectFill" HorizontalOptions="FillAndExpand" HeightRequest="300" WidthRequest="300" Margin="0,45,0,0"/>
-            <Frame Background="{StaticResource RedGradientBackground}" BorderColor="Black" CornerRadius="20" HeightRequest="462" Padding="15" Margin="0,25,0,0">
-                <!-- Rounded corners on top only -->
+        <VerticalStackLayout Spacing="0" Padding="0">
+            <Image Source="onboarding_image.png"
+                   Aspect="AspectFill"
+                   HeightRequest="300"
+                   WidthRequest="300"
+                   Margin="0,45,0,0"
+                   SemanticProperties.Description="A student training for SEGAK" />
+            <Border Background="{StaticResource RedGradientBackground}"
+                    Stroke="Black"
+                    StrokeShape="RoundRectangle 20,20,0,0"
+                    MinimumHeightRequest="462"
+                    Padding="15"
+                    Margin="0,25,0,0">
                 <VerticalStackLayout Padding="20">
                     <Label Text="Elevate Your SEGAK Prep"
                            FontSize="26"
@@ -15,6 +27,7 @@
                            HorizontalTextAlignment="Center"
                            Margin="0,15,0,0"
                            TextColor="White"
+                           SemanticProperties.HeadingLevel="Level1"
                            Style="{StaticResource LabelShadowStyle}"/>
                     <Label Text="Tailoring your SEGAK training has never been simpler. Get ready to meet your fitness goals and ace your school's physical assessment!"
                            FontSize="16"
@@ -22,21 +35,21 @@
                            TextColor="White"
                            Style="{StaticResource LabelShadowStyle2}"
                            Margin="0,30,0,30"/>
-                    <!-- Adjusted bottom margin for better spacing -->
                     <Button Text="Begin Your Journey"
                             Background="{StaticResource ButtonGradientBackground}"
+                            TextColor="White"
                             BorderColor="Black"
                             BorderWidth="2"
                             FontSize="16"
                             FontAttributes="Bold"
-                            WidthRequest="200"
+                            WidthRequest="220"
                             HeightRequest="50"
                             CornerRadius="10"
                             HorizontalOptions="Center"
                             Margin="0,5,0,30"
                             Command="{Binding StartCommand}"/>
                 </VerticalStackLayout>
-            </Frame>
+            </Border>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

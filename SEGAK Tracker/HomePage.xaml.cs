@@ -2,11 +2,11 @@ using SegakTracker.Core.ViewModels;
 
 namespace SEGAK_Tracker;
 
-public partial class ProgressListPage : ContentPage
+public partial class HomePage : ContentPage
 {
-    private readonly ProgressViewModel _viewModel;
+    private readonly HomeViewModel _viewModel;
 
-    public ProgressListPage(ProgressViewModel viewModel)
+    public HomePage(HomeViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = _viewModel = viewModel;

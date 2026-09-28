@@ -1,14 +1,20 @@
-using Microsoft.Maui.Controls;
+using SegakTracker.Core.ViewModels;
 
-namespace SEGAK_Tracker
+namespace SEGAK_Tracker;
+
+public partial class TrainingProgramPage : ContentPage
 {
-    public partial class TrainingProgramPage : ContentPage
-    {
-        public TrainingProgramPage()
-        {
-            InitializeComponent();
-        }
+    private readonly TrainingProgramViewModel _viewModel;
 
-        // Implement any necessary logic for interaction if needed
+    public TrainingProgramPage(TrainingProgramViewModel viewModel)
+    {
+        InitializeComponent();
+        BindingContext = _viewModel = viewModel;
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await _viewModel.LoadAsync();
     }
 }

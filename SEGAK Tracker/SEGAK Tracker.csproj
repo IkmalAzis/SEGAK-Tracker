@@ -24,7 +24,7 @@
 		<ApplicationTitle>SEGAK Tracker</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.segak_tracker</ApplicationId>
+		<ApplicationId>com.ikmalazis.segaktracker</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -71,23 +71,11 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="FitnessTrackingPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="OnboardingPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="ProgressListPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="TrainingProgramPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+		<ProjectReference Include="..\SegakTracker.Core\SegakTracker.Core.csproj" />
 	</ItemGroup>
 
 </Project>

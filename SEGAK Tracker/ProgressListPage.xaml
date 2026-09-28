@@ -1,51 +1,129 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:SegakTracker.Core.ViewModels;assembly=SegakTracker.Core"
              x:Class="SEGAK_Tracker.ProgressListPage"
+             x:DataType="vm:ProgressViewModel"
              Title="Progress List">
 
     <ScrollView>
-        <VerticalStackLayout Spacing="20" Padding="20">
-            <!-- Header Section -->
-            <Label Text="Gear up for greatness"
-                   FontSize="Large"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center"
-                   Margin="0,10"/>
+        <VerticalStackLayout Spacing="18" Padding="16,20,16,32">
 
-            <!-- Progress Details -->
-            <Frame BackgroundColor="Black" Padding="10">
-                <VerticalStackLayout>
-                    <Label Text="Up & down the bench : 80 -> 75 (+5)"
-                           FontSize="Medium"
-                           TextColor="White"/>
-                    <Label Text="Push up : 24 -> 28 (+4)"
-                           FontSize="Medium"
-                           TextColor="White"/>
-                    <Label Text="Partial curl : 11 -> 19 (+8)"
-                           FontSize="Medium"
-                           TextColor="White"/>
-                    <Label Text="Sit & reach : 26 -> 32 (+6)"
-                           FontSize="Medium"
-                           TextColor="White"/>
+            <!-- Header -->
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
+                <Image Source="training_icon.png" WidthRequest="80" HeightRequest="80" />
+                <Label Grid.Column="1"
+                       Text="Gear up for greatness"
+                       Style="{StaticResource ScreenTitle}"
+                       VerticalOptions="Center"
+                       SemanticProperties.HeadingLevel="Level1" />
+            </Grid>
 
-                    <!-- Score and Grade -->
-                    <Label Text="Your score : 17 Marks"
-                           FontSize="Medium"
-                           TextColor="Yellow"/>
-                    <Label Text="Grade : B"
-                           FontSize="Large"
-                           TextColor="Yellow"
-                           FontAttributes="Bold"
-                           HorizontalOptions="Center"/>
+            <!-- Empty state -->
+            <Border Style="{StaticResource Card}" BackgroundColor="{StaticResource CardBackground}" IsVisible="{Binding IsEmpty}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="No scores yet" Style="{StaticResource SectionTitle}" />
+                    <Label Text="Record your first SEGAK practice attempt to see your score, grade and improvement here."
+                           TextColor="White" FontSize="15" />
+                    <Button Text="Record your score" Command="{Binding RecordScoreCommand}" Style="{StaticResource PrimaryButton}" />
                 </VerticalStackLayout>
-            </Frame>
+            </Border>
 
-            <!-- Reset Button -->
-            <Button Text="Reset"
-                    BackgroundColor="Gray"
-                    TextColor="White"
-                    VerticalOptions="End"/>
+            <!-- First vs latest comparison -->
+            <VerticalStackLayout Spacing="18" IsVisible="{Binding HasRecords}">
+                <Label Text="{Binding ComparisonCaption}" Style="{StaticResource MutedLabel}" />
+
+                <Border Style="{StaticResource Card}" BackgroundColor="{StaticResource PanelBackground}" Stroke="Black" StrokeThickness="2">
+                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding Rows}" Spacing="12">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="vm:ProgressRow">
+                                <VerticalStackLayout Spacing="2">
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <Label Text="{Binding TestName}" FontSize="17" TextColor="White" FontAttributes="Bold" />
+                                        <HorizontalStackLayout Grid.Column="1" Spacing="6">
+                                            <Label FontSize="17" FontAttributes="Bold">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding FirstValue}" TextColor="{StaticResource ScoreYellow}" />
+                                                        <Span Text=" → " TextColor="{StaticResource ImprovedGreen}" />
+                                                        <Span Text="{Binding LatestValue}" TextColor="{StaticResource ScoreYellow}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <Label Text="{Binding ChangeText}" FontSize="17" FontAttributes="Bold" TextColor="{StaticResource MutedText}">
+                                                <Label.Triggers>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding IsImproved}" Value="True">
+                                                        <Setter Property="TextColor" Value="{StaticResource ImprovedGreen}" />
+                                                    </DataTrigger>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding IsDeclined}" Value="True">
+                                                        <Setter Property="TextColor" Value="{StaticResource DeclinedRed}" />
+                                                    </DataTrigger>
+                                                </Label.Triggers>
+                                            </Label>
+                                        </HorizontalStackLayout>
+                                    </Grid>
+                                    <Label Text="{Binding Hint}" Style="{StaticResource MutedLabel}" />
+                                </VerticalStackLayout>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Score and grade -->
+                <Label HorizontalOptions="Center" FontSize="26" FontAttributes="Bold" TextColor="{StaticResource ScoreYellow}"
+                       Style="{StaticResource LabelShadowStyle2}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Your score : " />
+                            <Span Text="{Binding ScoreText}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Text="Grade :" HorizontalOptions="Center" FontSize="26" FontAttributes="Bold" TextColor="{StaticResource ScoreYellow}" />
+                <Label Text="{Binding Grade}"
+                       HorizontalOptions="Center"
+                       FontSize="110"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource ScoreYellow}"
+                       Style="{StaticResource LabelShadowStyle}"
+                       SemanticProperties.Description="{Binding GradeDescription}" />
+                <Label Text="{Binding GradeDescription}" HorizontalOptions="Center" FontSize="18" TextColor="White" Margin="0,-16,0,0" />
+                <Label Text="Norms for this age are estimated and may differ slightly from the official SEGAK table."
+                       Style="{StaticResource MutedLabel}"
+                       HorizontalTextAlignment="Center"
+                       IsVisible="{Binding UsesEstimatedNorms}" />
+
+                <!-- History -->
+                <Label Text="All attempts" Style="{StaticResource SectionTitle}" Margin="0,8,0,0" />
+                <VerticalStackLayout BindableLayout.ItemsSource="{Binding History}" Spacing="8">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="vm:HistoryItem">
+                            <Border Style="{StaticResource Card}" Padding="14,10" BackgroundColor="{StaticResource CardBackground}">
+                                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                                    <Label Text="{Binding Grade}" FontSize="28" FontAttributes="Bold" TextColor="{StaticResource ScoreYellow}" VerticalOptions="Center" />
+                                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                                        <Label Text="{Binding DateText}" FontSize="15" TextColor="White" />
+                                        <Label Text="{Binding Summary}" Style="{StaticResource MutedLabel}" />
+                                    </VerticalStackLayout>
+                                    <Button Grid.Column="2"
+                                            Text="Delete"
+                                            FontSize="13"
+                                            Padding="10,4"
+                                            Style="{StaticResource SecondaryButton}"
+                                            VerticalOptions="Center"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProgressViewModel}}, Path=DeleteRecordCommand}"
+                                            CommandParameter="{Binding .}" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+
+                <Button Text="Reset"
+                        Command="{Binding ResetCommand}"
+                        Style="{StaticResource PrimaryButton}"
+                        Margin="0,12,0,0" />
+            </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

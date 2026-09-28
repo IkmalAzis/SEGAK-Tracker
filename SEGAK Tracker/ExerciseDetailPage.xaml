@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:SegakTracker.Core.ViewModels;assembly=SegakTracker.Core"
+             x:Class="SEGAK_Tracker.ExerciseDetailPage"
+             x:DataType="vm:ExerciseDetailViewModel"
+             Title="{Binding Title}">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding BackCommand}" />
+    </Shell.BackButtonBehavior>
+
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView>
+            <VerticalStackLayout Spacing="18" Padding="20,20,20,8">
+
+                <!-- Picture, slogan and today's count -->
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                    <Image Source="{Binding ImageName}" HeightRequest="140" Aspect="AspectFit" />
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="16">
+                        <Label Text="{Binding Tagline}"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="White"
+                               HorizontalTextAlignment="Center"
+                               Style="{StaticResource LabelShadowStyle2}" />
+                        <Border Style="{StaticResource Pill}" HorizontalOptions="Center">
+                            <Label Text="{Binding CompletedText}" FontSize="16" TextColor="Black" />
+                        </Border>
+                    </VerticalStackLayout>
+                </Grid>
+
+                <!-- Focus card -->
+                <Border Style="{StaticResource Card}"
+                        BackgroundColor="{Binding AccentColor, Converter={StaticResource HexToColor}}"
+                        Stroke="Black"
+                        StrokeThickness="2">
+                    <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                        <Label Text="{Binding Focus}"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="White"
+                               HorizontalTextAlignment="Center"
+                               Style="{StaticResource LabelShadowStyle2}" />
+                        <Border Style="{StaticResource Pill}" HorizontalOptions="Center">
+                            <Label Text="{Binding TaskCountText}" FontSize="16" TextColor="Black" />
+                        </Border>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Checklist -->
+                <VerticalStackLayout BindableLayout.ItemsSource="{Binding Tasks}" Spacing="6">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="vm:TrainingTaskItemViewModel">
+                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                                <CheckBox IsChecked="{Binding IsCompleted}" Color="White" VerticalOptions="Center"
+                                          SemanticProperties.Description="{Binding Label}" />
+                                <Label Grid.Column="1" Text="{Binding Label}" FontSize="18" TextColor="White" VerticalOptions="Center">
+                                    <Label.GestureRecognizers>
+                                        <!-- Tapping the text toggles the box too, which is easier on small screens. -->
+                                        <TapGestureRecognizer Tapped="OnTaskLabelTapped" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Button Grid.Row="1"
+                Text="Save"
+                Command="{Binding SaveCommand}"
+                Style="{StaticResource PrimaryButton}"
+                Margin="20,8,20,20" />
+    </Grid>
+</ContentPage>

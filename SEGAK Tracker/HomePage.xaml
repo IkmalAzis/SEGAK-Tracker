@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:SegakTracker.Core.ViewModels;assembly=SegakTracker.Core"
+             x:Class="SEGAK_Tracker.HomePage"
+             x:DataType="vm:HomeViewModel"
+             Title="Start your training today!">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="14" Padding="16,24">
+
+            <!-- Header with icon -->
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                <Image Source="fitness_icon.png" WidthRequest="96" HeightRequest="96" VerticalOptions="Center" />
+                <Label Grid.Column="1"
+                       Text="Ready to Improve Your Fitness?"
+                       Style="{StaticResource ScreenTitle}"
+                       VerticalOptions="Center"
+                       SemanticProperties.HeadingLevel="Level1" />
+            </Grid>
+
+            <!-- Daily training task -->
+            <Border Style="{StaticResource Card}" BackgroundColor="#FF0266">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenNextTaskCommand}" />
+                </Border.GestureRecognizers>
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="*,Auto" RowSpacing="8">
+                    <Label Grid.ColumnSpan="2"
+                           Text="Daily training task"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="White" />
+                    <HorizontalStackLayout Grid.Row="1" Spacing="10">
+                        <Image Source="clock_icon.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" />
+                        <Label Text="{Binding DailySummaryText}" FontSize="16" TextColor="White" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                    <ProgressBar Grid.Row="2" Grid.ColumnSpan="2" Progress="{Binding DailyProgress}" ProgressColor="White" />
+                    <HorizontalStackLayout Grid.Row="3" Spacing="10">
+                        <Image Source="clock_icon.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" />
+                        <Label Text="{Binding NextTaskText}" FontSize="16" TextColor="White" VerticalOptions="Center" LineBreakMode="WordWrap" />
+                    </HorizontalStackLayout>
+                    <Image Grid.Row="3" Grid.Column="1" Source="arrow_right.png" WidthRequest="30" HeightRequest="30" VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <!-- Latest SEGAK result -->
+            <Border Style="{StaticResource Card}" BackgroundColor="{StaticResource CardBackground}">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ViewProgressCommand}" />
+                </Border.GestureRecognizers>
+                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="12">
+                    <Label Text="{Binding LatestResultText}" FontSize="16" TextColor="White" VerticalOptions="Center" />
+                    <Label Grid.Column="1" Grid.RowSpan="2"
+                           Text="{Binding LatestGrade}"
+                           FontSize="40"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource ScoreYellow}"
+                           VerticalOptions="Center"
+                           IsVisible="{Binding LatestGrade, Converter={StaticResource HasText}}" />
+                    <Button Grid.Row="1"
+                            Text="Record a new score"
+                            Command="{Binding RecordScoreCommand}"
+                            Style="{StaticResource SecondaryButton}"
+                            HorizontalOptions="Start"
+                            Margin="0,8,0,0" />
+                </Grid>
+            </Border>
+
+            <!-- Training programme -->
+            <Grid ColumnDefinitions="*,Auto" Padding="4,6,4,0">
+                <Label Text="Training Program" Style="{StaticResource SectionTitle}" VerticalOptions="Center" />
+                <Label Grid.Column="1" Text="See all" FontSize="16" TextColor="#BB86FC" VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SeeAllCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+
+            <VerticalStackLayout BindableLayout.ItemsSource="{Binding Exercises}" Spacing="12">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="vm:ExerciseCardViewModel">
+                        <Border Style="{StaticResource Card}"
+                                Padding="0"
+                                BackgroundColor="{Binding AccentColor, Converter={StaticResource HexToColor}}">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomeViewModel}}, Path=OpenExerciseCommand}"
+                                    CommandParameter="{Binding Id}" />
+                            </Border.GestureRecognizers>
+                            <Grid ColumnDefinitions="*,Auto" Padding="24,0,0,0">
+                                <VerticalStackLayout VerticalOptions="Center" Spacing="2">
+                                    <Label Text="{Binding Title}" FontSize="17" FontAttributes="Bold" TextColor="White" />
+                                    <Label Text="{Binding TaskCountText}" FontSize="14" TextColor="White" />
+                                    <Label Text="{Binding ProgressText}" FontSize="13" TextColor="White" Opacity="0.85" />
+                                </VerticalStackLayout>
+                                <Image Grid.Column="1"
+                                       Source="{Binding ImageName}"
+                                       WidthRequest="100"
+                                       HeightRequest="100"
+                                       Aspect="AspectFill" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
