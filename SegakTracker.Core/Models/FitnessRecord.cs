@@ -12,6 +12,10 @@ public sealed class FitnessRecord
     /// <summary>When the attempt was recorded, stored in UTC.</summary>
     public DateTime RecordedAtUtc { get; set; }
 
+    /// <summary>SQLite does not keep <see cref="DateTimeKind"/>, so restore it before converting.</summary>
+    [Ignore]
+    public DateTime RecordedAtLocal => DateTime.SpecifyKind(RecordedAtUtc, DateTimeKind.Utc).ToLocalTime();
+
     public Gender Gender { get; set; }
 
     public int Age { get; set; }
