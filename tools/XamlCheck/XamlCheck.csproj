@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Compile-checks the MAUI app's C# and XAML (including compiled bindings via XamlC)
+    on plain net8.0, so it works on machines without the MAUI workload or Android SDK.
+    Platforms/ code is excluded. Usage: dotnet build tools/XamlCheck
+  -->
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>SEGAK_Tracker</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UseMaui>true</UseMaui>
+    <SingleProject>true</SingleProject>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <MauiStrictXamlCompilation>true</MauiStrictXamlCompilation>
+    <AppDir>$(MSBuildThisFileDirectory)../../SEGAK Tracker/</AppDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.100" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+    <ProjectReference Include="../../SegakTracker.Core/SegakTracker.Core.csproj" />
+    <Compile Include="$(AppDir)**/*.cs" Exclude="$(AppDir)Platforms/**;$(AppDir)obj/**;$(AppDir)bin/**" />
+    <MauiXaml Include="$(AppDir)**/*.xaml" Exclude="$(AppDir)Platforms/**;$(AppDir)obj/**;$(AppDir)bin/**"
+              Link="%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+</Project>

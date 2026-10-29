@@ -60,6 +60,9 @@ The screenshots below are the original design mockups the app is built from.
 | `SEGAK Tracker/` | The .NET MAUI app: XAML pages, Shell navigation, platform services (Preferences, dialogs, navigation) and DI setup in `MauiProgram.cs`. |
 | `SegakTracker.Core/` | Platform-independent logic: models, SEGAK norm tables and scoring (`Scoring/`), SQLite repositories (`Data/`), training programmes (`Training/`) and view models (`ViewModels/`). |
 | `SegakTracker.Tests/` | Unit tests for scoring, validation, persistence and every view model. |
+| `tools/XamlCheck/` | Compile-checks the app's C# and XAML bindings without the MAUI workload (`dotnet build tools/XamlCheck`). |
+
+Notes for contributors and AI coding agents are in [`AGENTS.md`](AGENTS.md).
 
 Keeping the logic in `SegakTracker.Core` means it can be tested with the plain .NET SDK — no emulator or MAUI workload needed.
 
